@@ -37,26 +37,24 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ArtSpaceScreen(modifier: Modifier = Modifier) {
-	val firstArtwork = R.drawable.letraj
-	val secondArtwork = R.drawable.letrao
-	val thirdArtwork = R.drawable.letras
-	val fourthArtwork = R.drawable.letrae
+	val firstArtwork = R.drawable.argentina
+	val secondArtwork = R.drawable.antartida
+	val thirdArtwork = R.drawable.grecia
+	val fourthArtwork = R.drawable.lima
 
 	var title by remember {
-		mutableStateOf(R.string.jose)
+		mutableStateOf(R.string.argentina)
 	}
-
 
 	var currentArtwork by remember {
 		mutableStateOf(firstArtwork)
 	}
 
-
-
-
 	Column(
 		modifier = modifier
-			.fillMaxWidth(),
+			.fillMaxSize()
+			.padding(horizontal = 16.dp),
+		verticalArrangement = Arrangement.Center,
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
 		ArtworkDisplay(currentArtwork = currentArtwork)
@@ -73,19 +71,19 @@ fun ArtSpaceScreen(modifier: Modifier = Modifier) {
 					when (currentArtwork) {
 						firstArtwork -> {
 							currentArtwork = secondArtwork
-							title = R.string.ignacio
+							title = R.string.antartida
 						}
 						secondArtwork -> {
 							currentArtwork = thirdArtwork
-							title = R.string.jara
+							title = R.string.grecia
 						}
 						thirdArtwork -> {
 							currentArtwork = fourthArtwork
-							title = R.string.nu_ez
+							title = R.string.lima
 						}
 						else -> {
 							currentArtwork = firstArtwork
-							title = R.string.jose
+							title = R.string.argentina
 						}
 					}
 				},
@@ -112,19 +110,19 @@ fun ArtSpaceScreen(modifier: Modifier = Modifier) {
 					when (currentArtwork) {
 						firstArtwork -> {
 							currentArtwork = secondArtwork
-							title = R.string.ignacio
+							title = R.string.antartida
 						}
 						secondArtwork -> {
 							currentArtwork = thirdArtwork
-							title = R.string.jara
+							title = R.string.grecia
 						}
 						thirdArtwork -> {
 							currentArtwork = fourthArtwork
-							title = R.string.nu_ez
+							title = R.string.lima
 						}
 						else -> {
 							currentArtwork = firstArtwork
-							title = R.string.jose
+							title = R.string.argentina
 						}
 					}
 				},
@@ -148,24 +146,33 @@ fun ArtSpaceScreen(modifier: Modifier = Modifier) {
 	}
 }
 
+
 @Composable
 fun ArtworkDisplay(
 	modifier: Modifier = Modifier,
 	@DrawableRes currentArtwork: Int
 ) {
-	Image(
-		painter = painterResource(currentArtwork),
-		contentDescription = stringResource(id = R.string.zero_two),
-		modifier = modifier.fillMaxWidth(),
-		contentScale = ContentScale.FillWidth
-	)
+	Box(
+		modifier = modifier
+			.fillMaxWidth()
+			.wrapContentHeight()
+			.padding(horizontal = 16.dp),
+		contentAlignment = Alignment.Center
+	) {
+		Image(
+			painter = painterResource(currentArtwork),
+			contentDescription = stringResource(id = R.string.zero_two),
+			contentScale = ContentScale.FillWidth
+		)
+	}
 }
 
 @Composable
 fun ArtworkTitle(
 	@StringRes title: Int
 ) {
-	Column (
+	Column(
+		modifier = Modifier.fillMaxWidth(),
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
 		// Artwork title
@@ -175,9 +182,6 @@ fun ArtworkTitle(
 			color = colorResource(id = R.color.blue_100),
 			fontSize = 32.sp
 		)
-		
-		// Artwork year
-
 	}
 }
 
